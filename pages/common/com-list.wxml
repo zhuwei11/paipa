@@ -1,0 +1,53 @@
+<!-- 渲染普通的单项数据 -->
+<!-- 例如：https://api.douban.com/v2/movie/top250?count=1 -->
+<template name="item1">
+  <!-- <navigator url="../item/item?id={{ item.id }}"> -->
+    <view class="item">
+      <image class="poster" src="{{ item.images.small }}"/>
+      <view class="meta">
+        <text class="title">{{ item.title }}</text>
+        <text class="sub-title">{{ item.original_title }} ({{ item.year }})</text>
+        <view class="artists">导演：<block wx:for="{{ item.directors }}" wx:key="id"> {{ item.name }} </block></view>
+      </view>
+      <view class="rating">
+        <text>{{ item.rating.average }}</text>
+      </view>
+    </view>
+  <!-- </navigator> -->
+</template>
+
+<!-- 在北美电影排行的API中数据格式与普通的API不同，这里是渲染北美电影排行的数据 -->
+<!-- 例如：https://api.douban.com/v2/movie/us_box?count=1 -->
+<template name="item2">
+  <!-- <navigator url="../item/item?id={{ item.subject.id }}"> -->
+    <view class="item">
+      <image class="poster" src="{{ item.imgPath }}"></image>
+      <view class="meta">
+        <text class="title">{{ item.expression }}</text>
+        <text class="sub-title">年龄：{{ item.age }}</text>
+         <text class="sub-title">性别：{{ item.sex > 0 ? '♀' : '♂'}}</text>
+        <view class="artists">{{item.glass > 0 ? '是个四眼仔吖' : '没戴眼镜哟！'}}</view>
+      </view>
+      <view class="rating">
+        <text>{{ item.face_val }}</text>
+      </view>
+    </view>
+  <!-- </navigator> -->
+</template>
+
+<!-- 电影列表组件 供每一个列表展示的页面使用 -->
+<template name="com-list">
+  <view class="list">
+    <template is="{{ item.subject ? 'item1' : 'item2' }}" data="{{ item }}" wx:for="{{ movies }}" wx:key="id"/>
+    <view class="tips">
+      <view wx:if="{{ hasMore }}">
+        <!-- <image src="/assets/loading.gif" mode="aspectFill"/>
+        <text>玩了命的加载中...</text> -->
+      </view>
+      <view wx:else>
+        <text>还没有好友测试过,点击右上角转发或下方分享按钮分享程序给好友查看好友颜值</text>
+      </view>
+      <button open-type='share'>立即分享</button>
+    </view>
+  </view>
+</template>

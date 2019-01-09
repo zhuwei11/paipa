@@ -1,0 +1,14 @@
+ {
+  "pages": [
+    "pages/index/index",
+    "pages/list/list"
+  ],
+  "window": {
+   "navigationBarBackgroundColor": "#aae5eb",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "拍拍",
+  "backgroundColor": "#f8f9fb",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": false
+  }
+}
